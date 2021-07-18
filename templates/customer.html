@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block style %}
+
+table {
+font-family: arial, sans-serif;
+border-collapse: separate;
+width: 100%;
+}
+
+td, th {
+border: 1px solid #dddddd;
+padding: 5px;
+text-align: left;
+}
+
+tr:nth-child(even) {
+background-color: #dddddd;
+}
+
+td a {
+text-decoration: none;
+}
+
+td a:hover {
+text-decoration: underline;
+}
+
+{% endblock style %}
+
+{% block body %}
+
+<div class="container my-4 py-2">
+    <section class="transfer_details my-5 text-center">
+        <h2>Customer Details</h2>
+
+        <table class="my-4">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Balance</th>
+                <th>Profile</th>
+            </tr>
+            {% for cust in customer %}
+            <tr>
+                <td>{{cust.id}}</td>
+                <td>{{cust.name}}</td>
+                <td>{{cust.email}}</td>
+                <td>{{cust.balance}}</td>
+                <td><a href="profile/{{cust.id}}">View</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+</div>
+
+{% endblock body %}

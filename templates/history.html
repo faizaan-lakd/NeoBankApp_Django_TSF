@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block style %}
+
+table {
+font-family: arial, sans-serif;
+border-collapse: separate;
+width: 100%;
+}
+
+td, th {
+border: 1px solid #dddddd;
+padding: 5px;
+text-align: left
+}
+
+tr:nth-child(even) {
+background-color: #dddddd;
+}
+
+{% endblock style %}
+
+{% block body %}
+
+<div class="container my-4 py-2">
+    <section class="transfer_details my-5 text-center">
+        <h2>Transfer Details</h2>
+
+        <table class="my-4">
+            <tr>
+                <th>DateTime</th>
+                <th>Sender</th>
+                <th>Reciever</th>
+                <th>Amount</th>
+            </tr>
+            {% for trans in transfer %}
+            <tr>
+                <td>{{trans.timestamp}}</td>
+                <td>{{trans.sender}}</td>
+                <td>{{trans.reciever}}</td>
+                <td>{{trans.amount}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+</div>
+
+{% endblock body %}

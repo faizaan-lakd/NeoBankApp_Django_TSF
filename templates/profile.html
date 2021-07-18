@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container my-4 py-2">
+    <section class="profile_and_transfer my-5">
+        <h2 class="text-center">Profile and Money Transfer</h2>
+        <hr class="border border-dark">
+        <div class="row my-5 align-items-center">
+            <div class="col-md-6 my-5 pl-5">
+                <h3 class="text-info mb-3 border-bottom border-dark" style="width: 37%;">Profile Details</h3>
+                <h6 class="py-0 my-0"><strong>Name:</strong> {{ sender.name }}</h6>
+                <h6 class="py-0 my-0"><strong>Email:</strong> {{ sender.email }}</h6>
+                <h6 class="py-0 my-0"><strong>Balance:</strong> {{ sender.balance }}</h6>
+            </div>
+
+            <div class="col-md-6 border-left border-dark pl-5">
+                <h3 class="text-info mb-3 border-bottom border-dark" style="width: 40%;">Transfer Money</h3>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="input-group mb-2 w-75">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Sender</div>
+                        </div>
+                        <input type="text" id="sender" name="sender" readonly class="form-control"
+                            value="{{ sender.name }}">
+                    </div>
+
+                    <div class="input-group mb-2 w-75">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Reciever</div>
+                        </div>
+                        <select class="custom-select mr-sm-2" id="reciever" name="reciever">
+                            <option selected>Select One</option>
+                            {% for recie in recieverAll %}
+                            {% if recie != sender %}
+                            <option value="{{ recie.id }}">{{ recie.name }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="input-group mb-2 w-75">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">$</div>
+                        </div>
+                        <input type="number" class="form-control" id="amount_transfer" name="amount_transfer"
+                            placeholder="Enter Amount">
+                    </div>
+
+                    <button class="btn btn-success px-4 mr-3" type="submit">Send</button>
+                    <button class="btn btn-warning px-4" type="reset">Reset</button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock body %}
